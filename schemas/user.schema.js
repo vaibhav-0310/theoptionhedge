@@ -16,13 +16,11 @@ const userSchema = new Schema({
     },
     Phone:{
         type:Number,
-        required: true,
         unique: true,
         trim: true,
     },
     city: {
         type: String,
-        required: true,
         trim: true
     },
 },

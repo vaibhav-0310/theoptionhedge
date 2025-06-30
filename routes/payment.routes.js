@@ -20,18 +20,28 @@ function isLoggedIn(req, res, next) {
 
 router.post("/create-order", async (req, res) => {
   try {
+    const { amount, courseName } = req.body;
+    
+    // Validate amount
+    if (!amount || amount <= 0) {
+      return res.status(400).json({ error: "Valid amount is required" });
+    }
+
     const options = {
-      amount: 9499 * 100, 
+      amount: amount * 100, // Convert to paise (Razorpay expects amount in paise)
       currency: "INR",
       receipt: `receipt_order_${Math.random().toString(36).substring(7)}`,
+      notes: {
+        course_name: courseName || "Course Subscription"
+      }
     };
 
     const order = await razorpay.orders.create(options);
     res.json(order);
 
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Failed to create order");
+    console.error("Error creating order:", error);
+    res.status(500).json({ error: "Failed to create order" });
   }
 });
 
