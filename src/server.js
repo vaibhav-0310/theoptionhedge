@@ -53,7 +53,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENTID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://theoptionhedge.com/api/auth/google/callback",
+    callbackURL: "http://localhost:8080/api/auth/google/callback",
   },
   async (accessToken, refreshToken, profile, done) => {
     try {

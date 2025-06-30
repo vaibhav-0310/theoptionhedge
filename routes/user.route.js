@@ -83,7 +83,7 @@ router.get("/auth/google", passport.authenticate("google", { scope: ["profile", 
 router.get(
   "/auth/google/callback",
   passport.authenticate('google', { 
-    failureRedirect: 'https://theoptionhedge.com' 
+    failureRedirect: 'http://localhost:8080' 
   }),
   async (req, res) => {
     try {
@@ -104,13 +104,13 @@ router.get(
       req.login(user, (err) => {
         if (err) {
           console.error("Login error:", err);
-          return res.redirect('https://theoptionhedge.com');
+          return res.redirect('http://localhost:8080');
         }
-        res.redirect('https://theoptionhedge.com/enroll');
+        res.redirect('http://localhost:8080/enroll');
       });
     } catch (error) {
       console.error("Google callback error:", error);
-      res.redirect('https://theoptionhedge.com');
+      res.redirect('http://localhost:8080');
     }
   }
 );
