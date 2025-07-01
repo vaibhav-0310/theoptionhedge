@@ -1,10 +1,10 @@
 import {Schema,model} from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
+
 const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
         trim: true
     },
     email:{
@@ -15,20 +15,19 @@ const userSchema = new Schema({
         lowercase: true,
     },
     Phone:{
-        type:Number,
+        type: Number,
         unique: true,
-        trim: true,
+        sparse: true , // This allows multiple null values
+        default: undefined
     },
     city: {
         type: String,
-        trim: true
     },
 },
 {
     timestamps: true,
     versionKey: false
 });
-  
 
 userSchema.plugin(passportLocalMongoose);
 
