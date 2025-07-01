@@ -89,7 +89,13 @@ passport.deserializeUser(async (serializedUser, done) => {
 
 
 mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log("Connected to database"))
+  .then(() => console.log("Connected to database");
+        try {
+            await User.collection.dropIndex("Phone_1");
+            console.log('Successfully dropped Phone_1 index');
+        } catch (indexError) {
+            console.log('Index Phone_1 might not exist or already dropped:', indexError.message);
+        })
   .catch((err) => console.log("Database connection error:", err));
 
 app.use('/api', userRoutes);
