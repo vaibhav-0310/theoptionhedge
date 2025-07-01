@@ -67,8 +67,6 @@ router.get("/current", (req, res) => {
       user: {
         id: req.user._id,
         email: req.user.email,
-        city: req.user.city,
-        phone: req.user.phone
       }
     });
   } else {
